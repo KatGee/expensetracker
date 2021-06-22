@@ -3,7 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Expence {
@@ -15,8 +15,8 @@ public class Expence {
     private String productName;
     private String productDescription;
     private double price;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
+    private LocalDate createdAt;
+    private LocalDate modifiedAt;
 
     public Long getId() {
         return id;
@@ -50,19 +50,19 @@ public class Expence {
         this.price = price;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getModifiedAt() {
+    public LocalDate getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(LocalDateTime modifiedAt) {
+    public void setModifiedAt(LocalDate modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

@@ -6,6 +6,7 @@ import com.kat.expencetracker.repository.ExpenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,7 +17,15 @@ public class ExpenceServiceImp implements ExpenceService{
 
     @Override
     public Expence addExpence(Expence expence) {
-        return null;
+
+        if(expence.getCreatedAt() == null)
+        {
+            expence.setCreatedAt(LocalDate.now());
+            expence.setModifiedAt(LocalDate.now());
+        }else{
+            expence.setModifiedAt(LocalDate.now());
+        }
+        return expenceRepository.save(expence);
     }
 
     @Override
@@ -26,7 +35,7 @@ public class ExpenceServiceImp implements ExpenceService{
 
     @Override
     public List<Expence> getAllExpences() {
-        return null;
+        return expenceRepository.findAll();
     }
 
     @Override
