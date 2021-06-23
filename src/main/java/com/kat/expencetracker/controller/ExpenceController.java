@@ -59,4 +59,11 @@ public class ExpenceController {
         mv.addObject("expence", expence);
         return mv;
     }
+    @GetMapping(path = "/{id}/delete")
+    public String expenceDelete(@PathVariable("id") Long id)
+    {
+        expenceService.deleteExpence(id);
+        return "redirect:/expence";
+    }
+
 }

@@ -30,7 +30,8 @@ public class ExpenceServiceImp implements ExpenceService{
 
     @Override
     public void deleteExpence(Long id) {
-
+        Expence expence = getExpence(id);
+        expenceRepository.delete(expence);
     }
 
     @Override
