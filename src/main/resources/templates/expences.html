@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Expences</title>
@@ -8,7 +8,23 @@
 <body>
   <div class="container">
     <h1>My Expences</h1>
+    <div class="container">
 
+            <div th:if = "${expences.size() == 0}">
+                <h1>You have no Epences!!</h1>
+                <a th:href="@{/expence/add}" class="btn btn-primary">ADD EXPENCE</a>
+                <p th:text="${expences.size()}"></p>
+            </div>
+
+            <div th:if="${expences.size() != 0}">
+                <div th:each="expence : ${expences}">
+                    <a th:href="@{'/expence/'+${expence.id}+'/detail'}"><p th:text="${expence.productName}"></p></a>
+                    <p th:text="${expence.productDescription}"></p>
+                    <p th:text="${expence.price}"></p>
+                </div>
+            </div>
+
+    </div>
   </div>
 </body>
 </html>

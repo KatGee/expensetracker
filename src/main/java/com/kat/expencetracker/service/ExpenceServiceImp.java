@@ -40,7 +40,7 @@ public class ExpenceServiceImp implements ExpenceService{
 
     @Override
     public Expence getExpence(Long id) {
-        return null;
+        return expenceRepository.findById(id).get();
     }
 
 }

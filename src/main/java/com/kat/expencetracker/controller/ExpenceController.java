@@ -6,6 +6,7 @@ import com.kat.expencetracker.service.ExpenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,8 @@ public class ExpenceController {
     public ModelAndView getAllExpence()
     {
         ModelAndView mv = new ModelAndView("expences");
-
+        List<Expence> expences = expenceService.getAllExpences();
+        mv.addObject("expences", expences);
         return mv;
     }
 
@@ -32,8 +34,6 @@ public class ExpenceController {
     {
         ModelAndView mv = new ModelAndView("add");
         Expence expence = new Expence();
-        expence.setProductName("Laptop");
-        expence.setProductDescription("It is a Dell Laptop");
         mv.addObject("expence", expence);
         return mv;
     }
@@ -42,5 +42,21 @@ public class ExpenceController {
     {
         expenceService.addExpence(expence);
         return "redirect:/expence";
+    }
+    @GetMapping(path = "/{id}/detail")
+    public ModelAndView expenceDetail(@PathVariable("id") Long id)
+    {
+        ModelAndView mv = new ModelAndView("detail");
+        Expence expence = expenceService.getExpence(id);
+        mv.addObject("expence", expence);
+        return mv;
+    }
+    @GetMapping(path = "/{id}/edit")
+    public ModelAndView expenceUpdate(@PathVariable("id") Long id)
+    {
+        ModelAndView mv = new ModelAndView("add");
+        Expence expence = expenceService.getExpence(id);
+        mv.addObject("expence", expence);
+        return mv;
     }
 }

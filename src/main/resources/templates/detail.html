@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Expence detail</title>
+    <link href="/webjars/bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" th:object="${expence}">
+    <form >
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" id="productName" class="form-control" name="productName" required th:field="*{productName}" readonly/>
+        </div>
+        <div class="mb-3">
+            <label for="productDescription" class="form-label">Product Description</label>
+            <textarea name="productDescription" id="productDescription" class="form-control" th:field="*{productDescription}" readonly></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="productPrice" class="form-label">Product Price</label>
+            <input type="number" name="productPrice" id="productPrice" class="form-control" required th:field="*{price}" readonly />
+        </div>
+        <!--Hidden fields-->
+        <div class="mb-3">
+            <input type="text" hidden class="form-control" name="id" th:field="*{id}"/>
+        </div>
+        <div class="mb-3">
+            <input type="date" hidden class="form-control" name="createdAt" th:field="*{createdAt}"/>
+        </div>
+        <div class="mb-3">
+            <input type="date" hidden class="form-control" name="modifiedAt" th:field="*{modifiedAt}"/>
+        </div>
+    </form>
+    <a th:href="@{'/expence/'+ *{id} + '/delete'}" class="btn btn-primary">DELETE EXPENCE</a>
+    <a th:href="@{'/expence/' + *{id} + '/edit'}" class="btn btn-primary">EDIT EXPENCE</a>
+</div>
+</body>
+</html>
