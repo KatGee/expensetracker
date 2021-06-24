@@ -2,6 +2,7 @@ package com.kat.expencetracker.service;
 
 
 import com.kat.expencetracker.model.Expence;
+import com.kat.expencetracker.model.User;
 import com.kat.expencetracker.repository.ExpenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class ExpenceServiceImp implements ExpenceService{
     }
 
     @Override
-    public List<Expence> getAllExpences() {
-        return expenceRepository.findAll();
+    public List<Expence> getAllExpences(User user) {
+        return expenceRepository.findByUser(user);
     }
 
     @Override

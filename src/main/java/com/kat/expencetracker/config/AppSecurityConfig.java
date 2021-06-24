@@ -30,8 +30,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
-
+                .formLogin()
+                    .defaultSuccessUrl("/expence",true);
     }
 
     @Bean

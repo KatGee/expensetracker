@@ -2,8 +2,11 @@ package com.kat.expencetracker.controller;
 
 
 import com.kat.expencetracker.model.Expence;
+import com.kat.expencetracker.model.MyUserDetails;
+import com.kat.expencetracker.model.User;
 import com.kat.expencetracker.service.ExpenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +24,11 @@ public class ExpenceController {
     ExpenceService expenceService;
 
     @GetMapping
-    public ModelAndView getAllExpence()
+    public ModelAndView getAllExpence(@AuthenticationPrincipal MyUserDetails myUserDetails)
     {
+        User user = myUserDetails.getUser();
         ModelAndView mv = new ModelAndView("expences");
-        List<Expence> expences = expenceService.getAllExpences();
+        List<Expence> expences = expenceService.getAllExpences(user);
         mv.addObject("expences", expences);
         return mv;
     }
@@ -38,8 +42,10 @@ public class ExpenceController {
         return mv;
     }
     @PostMapping(path = "/add")
-    public String saveExpence(Expence expence)
+    public String saveExpence(@AuthenticationPrincipal MyUserDetails myUserDetails, Expence expence)
     {
+        User user = myUserDetails.getUser();
+        expence.setUser(user);
         expenceService.addExpence(expence);
         return "redirect:/expence";
     }

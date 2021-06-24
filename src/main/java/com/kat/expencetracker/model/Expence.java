@@ -1,9 +1,8 @@
 package com.kat.expencetracker.model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Expence {
@@ -17,6 +16,10 @@ public class Expence {
     private double price;
     private LocalDate createdAt;
     private LocalDate modifiedAt;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -64,5 +67,13 @@ public class Expence {
 
     public void setModifiedAt(LocalDate modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
