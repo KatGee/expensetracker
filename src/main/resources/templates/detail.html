@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Expence detail</title>
@@ -31,7 +31,7 @@
             <input type="date" hidden class="form-control" name="modifiedAt" th:field="*{modifiedAt}"/>
         </div>
     </form>
-    <a th:href="@{'/expence/'+ *{id} + '/delete'}" class="btn btn-primary">DELETE EXPENCE</a>
+    <a th:href="@{'/expence/'+ *{id} + '/delete'}" class="btn btn-danger">DELETE EXPENCE</a>
     <a th:href="@{'/expence/' + *{id} + '/edit'}" class="btn btn-primary">EDIT EXPENCE</a>
 </div>
 </body>
